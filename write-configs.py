@@ -14,7 +14,16 @@ logfile %(port)s.log"""
 start = 6001
 count = 48
 
-for port in range(start, start + count + 1):
+"""
+for port in range(start, start + count):
     filename = 'redis%s.conf' % port
     with open(filename, 'wt') as f:
         f.write(template % {'port':port})
+"""
+
+
+filename = 'start-all.sh'
+with open(filename, 'wt') as f:
+    for port in range(start, start + count + 1):
+        conf = 'redis%s.conf' % port
+        f.write('redis-server %s\n' % conf)
