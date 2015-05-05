@@ -1,0 +1,1 @@
+pgrep redis | xargs kill
