@@ -1,48 +1,11 @@
-redis-server redis6001.conf
-redis-server redis6002.conf
-redis-server redis6003.conf
-redis-server redis6004.conf
-redis-server redis6005.conf
-redis-server redis6006.conf
-redis-server redis6007.conf
-redis-server redis6008.conf
-redis-server redis6009.conf
-redis-server redis6010.conf
-redis-server redis6011.conf
-redis-server redis6012.conf
-redis-server redis6013.conf
-redis-server redis6014.conf
-redis-server redis6015.conf
-redis-server redis6016.conf
-redis-server redis6017.conf
-redis-server redis6018.conf
-redis-server redis6019.conf
-redis-server redis6020.conf
-redis-server redis6021.conf
-redis-server redis6022.conf
-redis-server redis6023.conf
-redis-server redis6024.conf
-redis-server redis6025.conf
-redis-server redis6026.conf
-redis-server redis6027.conf
-redis-server redis6028.conf
-redis-server redis6029.conf
-redis-server redis6030.conf
-redis-server redis6031.conf
-redis-server redis6032.conf
-redis-server redis6033.conf
-redis-server redis6034.conf
-redis-server redis6035.conf
-redis-server redis6036.conf
-redis-server redis6037.conf
-redis-server redis6038.conf
-redis-server redis6039.conf
-redis-server redis6040.conf
-redis-server redis6041.conf
-redis-server redis6042.conf
-redis-server redis6043.conf
-redis-server redis6044.conf
-redis-server redis6045.conf
-redis-server redis6046.conf
-redis-server redis6047.conf
-redis-server redis6048.conf
+#!/bin/bash
+
+for i in {6001..6048}
+do
+    redis-server redis$i.conf
+done
+
+for i in {7001..7048}
+do
+    redis-server redis$i.conf
+done
