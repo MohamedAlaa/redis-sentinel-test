@@ -10,7 +10,7 @@ do
     redis-server redis$i.conf
 done
 
-for i in {8001..8003}
+for i in {8001..8021}
 do
     redis-sentinel sentinel$i.conf
 done
