@@ -3,7 +3,6 @@
 import os
 import time
 import sys
-import redis
 import yaml
 import logging
 import logging.handlers
@@ -13,8 +12,7 @@ import subprocess
 
 re_server_info = re.compile('([^:]+):(\d+):(\d+) (.*)')
 
-parser = argparse.ArgumentParser(description='Detect sentinel failover, rewrite \
-    twemproxy config, restart twemproxy')
+parser = argparse.ArgumentParser(description='rewrite twemproxy config and restart twemproxy')
 parser.add_argument('old_ip')
 parser.add_argument('old_port')
 parser.add_argument('new_ip')
@@ -49,12 +47,6 @@ except yaml.YAMLError as e:
     logging.error('Twemproxy yaml error: %s', e)
     sys.exit(1)
 
-name = data[0]
-old_ip = data[1]
-old_port = data[2]
-new_ip = data[3]
-new_port = data[4]
-
 # Get twemproxy config
 try:
     with open(args.config) as f:
@@ -71,8 +63,8 @@ for pool, data in config.iteritems():
         match = re_server_info.match(server)
         if match:
             ip, port, weight, name = match.groups()
-            if old_ip == ip and old_port == port:
-                entry = '%s:%s:%s %s' % (new_ip, new_port, weight, name)
+            if args.old_ip == ip and args.old_port == port:
+                entry = '%s:%s:%s %s' % (args.new_ip, args.new_port, weight, name)
                 logging.info('Replacing %s with %s in pool %s', server, entry, pool)
                 config[pool]['servers'][i] = entry
                 changed = True
@@ -95,3 +87,5 @@ if changed:
     except Exception as e:
         logging.error('Error executing command: %s', e)
         sys.exit(1)
+else:
+    logging.info('No matching servers found')

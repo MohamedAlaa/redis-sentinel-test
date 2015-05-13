@@ -9,6 +9,7 @@ template = """sentinel monitor %(name)s 127.0.0.1 %(port)s %(quorum)s
 sentinel down-after-milliseconds %(name)s 3000
 sentinel parallel-syncs %(name)s 1
 sentinel failover-timeout %(name)s 60000
+sentinel client-reconfig-script %(name)s client-reconfigure.sh
 """
 
 with open('default-sentinel.conf', 'wt') as f:
